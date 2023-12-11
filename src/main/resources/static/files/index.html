@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba UDE</title>
+</head>
+<body>
+    
+    <div>
+        <label for="idInput">ID: </label>
+        <input type="text" id="idInput">
+        <button onclick="getNombre()">Obtener Nombre</button>
+    </div>
+    <div id="nombreResult"></div>
+    
+    <script>
+        function getNombre() {
+            const id = document.getElementById("idInput").value;
+            if (id) {
+                fetch(`http://127.0.0.1:8080/image/$id`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("nombreResult").innerHTML = `Nombre: ${data.nombre}`;
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el nombre:", error);
+                        document.getElementById("nombreResult").innerHTML = "Error al obtener el nombre.";
+                    });
+            } else {
+                document.getElementById("nombreResult").innerHTML = "Por favor, ingrese un ID válido.";
+            }
+        }
+    </script>
+</body>
+</html>
