@@ -14,8 +14,10 @@ import io.ktor.server.tomcat.*
 
 //Configuracion del servidor
 fun main() {
-    embeddedServer(Tomcat, port = 8080, host = "127.0.0.1", module = Application::module)
-        .start(wait = true)
+   // embeddedServer(Tomcat, port = 8080, host = "127.0.0.1", module = Application::module)
+       // .start(wait = true)
+    embeddedServer(Tomcat, port = System.getenv("PORT").toInt(), host = "0.0.0.0", module = Application::module)
+    .start(wait = true)
 }
 
 fun Application.module() {
